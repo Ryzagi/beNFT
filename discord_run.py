@@ -71,6 +71,7 @@ async def on_message(message: Message) -> None:
     if message.content.startswith('/start'):
         await start(message)
         return
+    await message.channel.typing()
     async with aiohttp.ClientSession() as session:
         # Example for MESSAGE_ENDPOINT
         async with session.post(
@@ -81,7 +82,6 @@ async def on_message(message: Message) -> None:
     await message.channel.typing()
     num_messages = len(chatbot_response["result"]) // MAX_MESSAGE_LENGTH
     await message.channel.typing()
-    await asyncio.sleep(1)
     for i in range(num_messages + 1):
         await message.channel.typing()
         await asyncio.sleep(1)
