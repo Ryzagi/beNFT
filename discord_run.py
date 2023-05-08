@@ -24,6 +24,7 @@ def parse_args():
     )
     return parser.parse_args()
 
+
 args = parse_args()
 
 
@@ -65,8 +66,9 @@ async def start(ctx):
 async def on_message(message: Message) -> None:
     if message.author == bot.user:
         return
-    if not isinstance(message.channel, discord.DMChannel):
-        return
+    # DM only
+    #if not isinstance(message.channel, discord.DMChannel):
+    #    return
 
     if message.content.startswith('/start'):
         await start(message)
