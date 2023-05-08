@@ -52,12 +52,22 @@ async def start(message: types.Message):
 # Define the handler function for the /query command
 @dispatcher.message_handler()
 async def handle_query_command(message: types.Message):
+    await bot.send_chat_action(
+        message.from_user.id, action=types.ChatActions.TYPING
+    )
     # Send a request to the FastAPI endpoint to get the most relevant paragraph
-    response = requests.post("http://localhost:8000/api/message", json={"message": message.text})
-    result_text = response.json()["result"]
+    async with aiohttp.ClientSession() as session:
+        # Example for MESSAGE_ENDPOINT
+        async with session.post(
+                "http://localhost:8000/api/message",
+                json={"message": message.text},
+        ) as response:
+            result_text = await response.json()
 
-    num_messages = len(result_text) // MAX_MESSAGE_LENGTH
-
+    num_messages = len(result_text["result"]) // MAX_MESSAGE_LENGTH
+    await bot.send_chat_action(
+        message.from_user.id, action=types.ChatActions.TYPING
+    )
     for i in range(num_messages + 1):
         await bot.send_chat_action(
             message.from_user.id, action=types.ChatActions.TYPING
@@ -65,7 +75,7 @@ async def handle_query_command(message: types.Message):
         await asyncio.sleep(1)
         await bot.send_message(
             message.from_user.id,
-            text=result_text[i * MAX_MESSAGE_LENGTH: (i + 1) * MAX_MESSAGE_LENGTH],
+            text=result_text["result"][i * MAX_MESSAGE_LENGTH: (i + 1) * MAX_MESSAGE_LENGTH],
         )
 
 
