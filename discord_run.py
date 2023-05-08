@@ -58,7 +58,7 @@ async def start(ctx):
     author_id = ctx.author.id
     await ctx.channel.typing()
     await asyncio.sleep(1)
-    await ctx.channel.send("Welcome to BeNFT!\nAsk your question and I'll answer it!")
+    await ctx.channel.send("Hi there!\nI'm BeAI. How can I assist you today?")
 
 
 @bot.event

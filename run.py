@@ -42,7 +42,7 @@ async def start(message: types.Message):
     # Send a welcome message with a "start" button
     await bot.send_message(
         message.from_user.id,
-        text="Welcome to BeNFT!\nAsk your question and I'll answer it!",
+        text="Hi there!\nI'm BeAI. How can I assist you today?",
         # reply_markup=RESTART_KEYBOARD
     )
     # Pause for 1 second
