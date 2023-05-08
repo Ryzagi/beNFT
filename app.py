@@ -33,7 +33,7 @@ else:
 
 print("Index is built")
 
-system_template = """Use the following pieces of context to answer the users question.
+system_template = """You are BeAI Support Assistant from BeNFT Solutions. Use the following pieces of context to answer the users question.
 If you don't know the answer, just say that "I don't know", don't try to make up an answer.
 ----------------
 {summaries}"""
