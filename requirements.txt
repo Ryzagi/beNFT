@@ -1,4 +1,5 @@
 openai
+fpdf
 aiogram
 aioschedule
 fastapi
@@ -12,7 +13,6 @@ langchain
 pydantic
 pypdf
 aiohttp
-fpdf
 attrs==23.1.0
 Automat==22.10.0
 certifi==2022.12.7
