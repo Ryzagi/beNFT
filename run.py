@@ -13,7 +13,6 @@ import requests
 MAX_MESSAGE_LENGTH = 4000
 
 
-
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -47,6 +46,32 @@ async def start(message: types.Message):
     )
     # Pause for 1 second
     await asyncio.sleep(1)
+
+
+# Define a handler for the "/refresh_data" command
+@dispatcher.message_handler(commands=["refresh_data"])
+async def refresh_data(message: types.Message):
+    # Show a "typing" action to the user
+    await bot.send_chat_action(message.from_user.id, action=types.ChatActions.TYPING)
+    await bot.send_message(
+        message.from_user.id,
+        text="Please, wait while database is updating..."
+    )
+    # Send a request to the FastAPI endpoint to refresh database
+    async with aiohttp.ClientSession() as session:
+        # Example for MESSAGE_ENDPOINT
+        async with session.post(
+                "http://localhost:8000/api/refresh_data",
+                json={},
+        ) as response:
+            result_text = await response.json()
+    # Show a "typing" action to the user
+    await bot.send_chat_action(message.from_user.id, action=types.ChatActions.TYPING)
+    # Send results
+    await bot.send_message(
+        message.from_user.id,
+        text=result_text['result']
+    )
 
 
 # Define the handler function for the /query command

@@ -61,6 +61,24 @@ async def start(ctx):
     await asyncio.sleep(1)
     await ctx.channel.send("Hi there!\nI'm BeAI. How can I assist you today?")
 
+# Define a handler for the "/refresh_data" command
+@bot.command(name='refresh_data')
+async def refresh_data(message: Message):
+    # Show a "typing" action to the user
+    await message.channel.typing()
+    await message.channel.send("Please, wait while database is updating...")
+    # Send a request to the FastAPI endpoint to refresh database
+    async with aiohttp.ClientSession() as session:
+        # Example for MESSAGE_ENDPOINT
+        async with session.post(
+                "http://localhost:8000/api/refresh_data",
+                json={},
+        ) as response:
+            result_text = await response.json()
+    # Show a "typing" action to the user
+    await message.channel.typing()
+    # Send results
+    await message.channel.send(result_text['result'])
 
 @bot.event
 async def on_message(message: Message) -> None:
@@ -72,6 +90,9 @@ async def on_message(message: Message) -> None:
 
     if message.content.startswith('/start'):
         await start(message)
+        return
+    if message.content.startswith('/refresh_data'):
+        await refresh_data(message)
         return
     await message.channel.typing()
     async with aiohttp.ClientSession() as session:
