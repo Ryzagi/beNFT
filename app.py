@@ -45,7 +45,7 @@ prompt = ChatPromptTemplate.from_messages(messages)
 
 chain_type_kwargs = {"prompt": prompt}
 llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.7,
-                 max_tokens=512)  # Modify model_name if you have access to GPT-4
+                 max_tokens=256)  # Modify model_name if you have access to GPT-4
 
 app = FastAPI()
 
