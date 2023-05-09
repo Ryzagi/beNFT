@@ -23,7 +23,7 @@ if os.path.exists("data_store"):
         OpenAIEmbeddings()
     )
 else:
-    file = "BeNFT.pdf"
+    file = str(THIS_DIR / "beNFT.pdf")
     loader = PyPDFLoader(file)
     input_text = loader.load_and_split()
     embeddings = OpenAIEmbeddings()
