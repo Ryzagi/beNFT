@@ -91,6 +91,19 @@ async def refresh_data():
 # Define the endpoint for handling queries
 @app.post(MESSAGE_ENDPOINT)
 async def handle_query(request: Message):
+    if os.path.exists("data_store"):
+        vector_store = FAISS.load_local(
+            "data_store",
+            OpenAIEmbeddings()
+        )
+    else:
+        file = str(THIS_DIR / "beNFT.pdf")
+        loader = PyPDFLoader(file)
+        input_text = loader.load_and_split()
+        embeddings = OpenAIEmbeddings()
+        vector_store = FAISS.from_documents(input_text, embeddings)
+        # Save the files `to local disk.
+        vector_store.save_local("data_store")
 
     chain = RetrievalQAWithSourcesChain.from_chain_type(
         llm=llm,
