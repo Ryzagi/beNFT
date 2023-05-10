@@ -9,7 +9,7 @@ from langchain.chains import RetrievalQAWithSourcesChain
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from data import Message
-from sql import get_info_from_sql
+from sql import get_info_from_sql, delete_all_from_sql
 from utils import text_to_pdf
 
 REFRESH_ENDPOINT = "/api/refresh_data"
@@ -55,10 +55,13 @@ app = FastAPI()
 async def refresh_data():
     try:
         pdf_path = Path(THIS_DIR / "beNFT.pdf")
-        # Delete the file
-        pdf_path.unlink()
+        if pdf_path.exists():
+            # Delete the file
+            pdf_path.unlink()
         # Set the directory where the scrapy project is located
         scrapy_project_dir = Path(__file__).parent / "scrapper"
+        # Delete the database
+        delete_all_from_sql(str(scrapy_project_dir / 'articles.sqlite'))
 
         # Set the command to run
         command = ['scrapy', 'crawl', 'benft']

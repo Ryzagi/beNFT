@@ -1,6 +1,18 @@
 import sqlite3
 
 
+def delete_all_from_sql(sql_path: str):
+    # Connect to the database
+    conn = sqlite3.connect(sql_path)
+    cursor = conn.cursor()
+
+    # Delete all rows from the article table
+    cursor.execute("DELETE FROM article")
+
+    # Commit the changes and close the connection
+    conn.commit()
+    conn.close()
+
 def get_info_from_sql(sql_path: str):
     # Connect to the database
     conn = sqlite3.connect(sql_path)
