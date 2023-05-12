@@ -1,6 +1,8 @@
 import argparse
 import asyncio
 import logging
+import re
+
 import aiohttp
 import base64
 import discord
@@ -84,6 +86,8 @@ async def refresh_data(message: Message):
 async def on_message(message: Message) -> None:
     if message.author == bot.user:
         return
+    message.content = re.sub(r'<.*?>', '', message.content)
+
     if message.content.startswith('@BeAI'):
         message.content = message.content.replace('@BeAI', '')
     print(message.content)
