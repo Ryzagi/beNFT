@@ -84,6 +84,9 @@ async def refresh_data(message: Message):
 async def on_message(message: Message) -> None:
     if message.author == bot.user:
         return
+    if message.content.startswith('@BeAI'):
+        message.content = message.content.replace('@BeAI', '')
+
     # DM only
     #if not isinstance(message.channel, discord.DMChannel):
     #    return
