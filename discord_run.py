@@ -86,7 +86,7 @@ async def on_message(message: Message) -> None:
         return
     if message.content.startswith('@BeAI'):
         message.content = message.content.replace('@BeAI', '')
-
+    print(message.content)
     # DM only
     #if not isinstance(message.channel, discord.DMChannel):
     #    return
