@@ -19,6 +19,7 @@ from scrapy_project.db import Session, Article
 class PgPipeline:
     def open_spider(self, spider):
         self.session = Session()
+        self.session.query(Article).delete()
 
     def close_spider(self, spider):
         self.session.commit()
@@ -37,3 +38,4 @@ class PgPipeline:
         art = Article(**item_dict)
         self.session.merge(art)
         return item
+    
