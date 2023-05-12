@@ -34,7 +34,8 @@ else:
 print("Index is built")
 
 system_template = """You are BeAI Support Assistant from BeNFT Solutions. Use the following pieces of context to answer the users question.
-If you don't know the answer, just say that "I don't know", don't try to make up an answer.
+If you don't know the answer, just say that "I don't know", don't try to make up an answer. Don't mention the source file path in any way.
+Do not answer questions that are not related to BeNFT topics. Keep it on the topic of BeNFT more strictly.
 ----------------
 {summaries}"""
 messages = [
