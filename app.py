@@ -1,6 +1,8 @@
 import os
 import subprocess
 from pathlib import Path
+
+import uvicorn
 from fastapi import FastAPI
 from langchain.document_loaders import PyPDFLoader
 from langchain.prompts.chat import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate
@@ -124,3 +126,6 @@ async def handle_query(request: Message):
     )
     result_text = chain(request.message)
     return {"result": result_text['answer']}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

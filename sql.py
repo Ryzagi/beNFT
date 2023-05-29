@@ -32,3 +32,7 @@ def get_info_from_sql(sql_path: str):
 
     # Return the extracted text
     return texts
+
+
+if __name__ == "__main__":
+    print(get_info_from_sql("scrapper/articles.sqlite"))
