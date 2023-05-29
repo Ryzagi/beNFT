@@ -17,7 +17,8 @@ intents = discord.Intents.default()
 intents.members = True
 bot = Bot(command_prefix='/', intents=intents)
 MAX_MESSAGE_LENGTH = 2000
-
+import os
+bot_token = os.environ.get('DISCORD_API_KEY')
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -27,7 +28,7 @@ def parse_args():
     return parser.parse_args()
 
 
-args = parse_args()
+#args = parse_args()
 
 
 def try_(func):
@@ -119,5 +120,5 @@ async def on_message(message: Message) -> None:
 
 
 if __name__ == "__main__":
-    bot_token = args.discord_token
+    #bot_token = args.discord_token
     bot.run(bot_token)
