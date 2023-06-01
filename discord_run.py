@@ -120,5 +120,5 @@ async def on_message(message: Message) -> None:
 
 
 if __name__ == "__main__":
-    #bot_token = args.discord_token
+    bot_token = args.discord_token
     bot.run(bot_token)

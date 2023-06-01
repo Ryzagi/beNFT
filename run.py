@@ -24,7 +24,7 @@ def parse_args():
 
 args = parse_args()
 # Set up the Telegram bot
-bot = Bot(token=bot_token)
+bot = Bot(token=args.telegram_token)
 dispatcher = Dispatcher(bot)
 
 # Define a ReplyKeyboardMarkup to show a "start" button
