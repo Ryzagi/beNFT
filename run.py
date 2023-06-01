@@ -12,7 +12,7 @@ import requests
 
 MAX_MESSAGE_LENGTH = 4000
 import os
-bot_token = os.environ.get('TELEGRAM_API_KEY')
+#bot_token = os.environ.get('TELEGRAM_API_KEY')
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -22,7 +22,7 @@ def parse_args():
     return parser.parse_args()
 
 
-#args = parse_args()
+args = parse_args()
 # Set up the Telegram bot
 bot = Bot(token=bot_token)
 dispatcher = Dispatcher(bot)
