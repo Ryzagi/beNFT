@@ -3,7 +3,6 @@ from fpdf import FPDF
 
 
 def text_to_pdf(text, filename):
-    print(text)
     a4_width_mm = 210
     pt_to_mm = 0.35
     fontsize_pt = 10
@@ -27,5 +26,4 @@ def text_to_pdf(text, filename):
 
         for wrap in lines:
             pdf.cell(0, fontsize_mm, wrap, ln=1)
-    print(text)
     pdf.output(filename, 'F')
