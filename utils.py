@@ -3,13 +3,14 @@ from fpdf import FPDF
 
 
 def text_to_pdf(text, filename):
+    print(text)
     a4_width_mm = 210
     pt_to_mm = 0.35
     fontsize_pt = 10
     fontsize_mm = fontsize_pt * pt_to_mm
     margin_bottom_mm = 10
     character_width_mm = 7 * pt_to_mm
-    width_text = a4_width_mm / character_width_mm
+    width_text = int(a4_width_mm / character_width_mm)
 
     pdf = FPDF(orientation='P', unit='mm', format='A4')
     pdf.set_auto_page_break(True, margin=margin_bottom_mm)
@@ -26,5 +27,5 @@ def text_to_pdf(text, filename):
 
         for wrap in lines:
             pdf.cell(0, fontsize_mm, wrap, ln=1)
-
+    print(text)
     pdf.output(filename, 'F')
