@@ -109,6 +109,7 @@ async def on_message(message: Message) -> None:
                 "http://localhost:8000/api/message",
                 json={"message": message.content},
         ) as response:
+            print(response.json())
             chatbot_response = await response.json()
     await message.channel.typing()
     num_messages = len(chatbot_response["result"]) // MAX_MESSAGE_LENGTH
