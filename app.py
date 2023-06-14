@@ -19,19 +19,19 @@ MESSAGE_ENDPOINT = "/api/message"
 model_name_embeddings = "text-embedding-ada-002"
 THIS_DIR = Path(__file__).parent
 # Create datastore
-if os.path.exists("data_store"):
-    vector_store = FAISS.load_local(
-        "data_store",
-        OpenAIEmbeddings()
-    )
-else:
-    file = str(THIS_DIR / "beNFT.pdf")
-    loader = PyPDFLoader(file)
-    input_text = loader.load_and_split()
-    embeddings = OpenAIEmbeddings()
-    vector_store = FAISS.from_documents(input_text, embeddings)
-    # Save the files `to local disk.
-    vector_store.save_local("data_store")
+#if os.path.exists("data_store"):
+#    vector_store = FAISS.load_local(
+#        "data_store",
+#        OpenAIEmbeddings()
+#    )
+#else:
+#    file = str(THIS_DIR / "beNFT.pdf")
+#    loader = PyPDFLoader(file)
+#    input_text = loader.load_and_split()
+#    embeddings = OpenAIEmbeddings()
+#    vector_store = FAISS.from_documents(input_text, embeddings)
+#    # Save the files `to local disk.
+#    vector_store.save_local("data_store")
 
 print("Index is built")
 
